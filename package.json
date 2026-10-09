@@ -1,0 +1,56 @@
+{
+  "name": "yellowstone-deck-estimator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Yellowstone Renovation \u2014 onsite sales consultation and deterministic deck estimator",
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "tsx watch src/server/index.ts",
+    "dev:web": "vite",
+    "build": "vite build && tsc -p tsconfig.json --noEmit",
+    "start": "NODE_ENV=production tsx src/server/index.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "seed:demo": "tsx src/server/seedDemo.ts",
+    "import:pricebook": "tsx src/server/importPricebook.ts"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0",
+    "express": "^4.21.2",
+    "idb-keyval": "^6.2.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.16",
+    "papaparse": "^5.4.1",
+    "pdfkit": "^0.15.2",
+    "polygon-clipping": "^0.15.7",
+    "qrcode": "^1.5.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "tsx": "^4.20.6",
+    "xlsx": "^0.18.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.10.1",
+    "@types/nodemailer": "^6.4.17",
+    "@types/papaparse": "^5.3.15",
+    "@types/pdfkit": "^0.13.8",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/supertest": "^6.0.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "supertest": "^7.0.0",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.8"
+  }
+}
