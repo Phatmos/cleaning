@@ -17,4 +17,4 @@ if (fs.existsSync(dist)) {
 }
 setInterval(() => processOutbox().catch((e) => console.error('outbox', e)), 60_000).unref();
 const port = Number(process.env.PORT ?? 3001);
-app.listen(port, () => console.log(`Yellowstone estimator API on http://localhost:${port}`));
+app.listen(port, process.env.HOST ?? '0.0.0.0', () => console.log(`Yellowstone estimator API on http://localhost:${port}`));
