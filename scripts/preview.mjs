@@ -17,9 +17,12 @@ function run(args) {
 }
 if (!existsSync('node_modules/.bin/tsx')) run(['ci']);
 run(['run', 'build']);
-if (!existsSync('preview-data/yellowstone.db')) run(['run', 'seed:demo']);
+if (!existsSync('preview-data/yellowstone.db')) {
+  const seeded = spawnSync(process.execPath, ['--import', 'tsx', 'src/server/seedDemo.ts'], { stdio: 'inherit', env });
+  if (seeded.status !== 0) process.exit(seeded.status || 1);
+}
 console.log('\nPREVIEW: http://localhost:3001\nLogin: admin@demo.local\nPassword: demo-admin-1\nDemo prices only. Keep this window open; Ctrl+C stops the app.\n');
-const server = spawn(npm, ['start'], { stdio: 'inherit', env, shell: process.platform === 'win32' });
+const server = spawn(process.execPath, ['--import', 'tsx', 'src/server/index.ts'], { stdio: 'inherit', env: { ...env, NODE_ENV: 'production' } });
 let opened = false;
 const poll = setInterval(async () => {
   try {
